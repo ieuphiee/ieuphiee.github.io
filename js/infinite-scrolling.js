@@ -1,7 +1,7 @@
 $(document).ready(function() {
 	alert("hey!");
 	$('.container').infiniteScroll({
- 	maxPage: 6,
+ 	maxPage: 2,
 		path: function(index) {
 			return "index" + index + ".html";
 		}
