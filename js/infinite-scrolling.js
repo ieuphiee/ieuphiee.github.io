@@ -1,8 +1,9 @@
-$(document).ready(function(){
+$(document).ready(function() {
+	alert("hey!");
 	$('.container').infiniteScroll({
- 	// options
- 	path: '.pagination__next',
- 	append: 'container2',
-	history: false,
+ 	maxPage: 6,
+		path: function(index) {
+			return "index" + index + ".html";
+		}
 	});
-})
+});
