@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Card Reading</title>
+<link href="style.css" rel="stylesheet" type="text/css" />
+<link href='https://fonts.googleapis.com/css?family=Open+Sans|PT+Sans|Merriweather|Abel|Quicksand|Lora' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Playfair+Display' rel='stylesheet' type='text/css'>
+<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+<link rel="icon" href="favicon.ico" type="image/x-icon"></head>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script src="script3.js"></script>
+
+<script>
+$(document).ready(function(){
+    $("button").click(function(){
+        $("#div1").fadeIn();
+    });
+});
+
+</script>
+
+<script src="card.js"></script>
+
+
+</head>
+<body onLoad="card()">
+<div id="navbar">
+<div class="innertube">
+<div class="logo">TAROCCHI</div>
+<a href="index.html">Home</a>
+<a href="history.html">History</a>
+<a href="majorarcana.html">The Cards</a>
+<a href="tutorial.html">Tutorials</a>
+<a href="reading.html">Card Reading</a>
+</div></div>
+<div id="maincontainer">
+<div id="contentwrapper">
+<div id="contentcolumn">
+<div class="innertube">
+<h1>Ask the Cards</h1>
+<h2>Helpful Tips & Guidelines</h2>
+<ul>
+<li>Before selecting a card, try to think of an open ended question that you want to ask the cards.</li>
+<li>You can ask the cards a question about the past, present, or future.</li>
+<li>Try to frame the question in a way that provides space for interpretation, rather than just a simple "yes" or "no" question.</li>
+<li>Your question should focus on yourself rather than on others. This is about <i>you</i> and your decisions.</li>
+<li>Examples of good questions include: <i>How can I improve...?</i> or <i>What do I need to know about...?</i></li>
+<li>If you're ready, select a card below.</li>
+</ul>
+
+<center><button>SELECT A CARD</button>
+
+<div id="div1" style="width:200px;height:auto;display:none;background-color:none;font-family:'Abel';"><br><script type="text/javascript">getRandomCard(random_card_array);</script></div><br>
+
+</center>
+
+
+</div>
+</div>
+</div>
+
+
+</div>
+
+</body>
+</html>

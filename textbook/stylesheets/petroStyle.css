@@ -1,0 +1,1257 @@
+@charset "UTF-8";
+/* CSS Document - All page styling
+
+Colors used:
+#ffffff - white for text on header and sidebar
+#000000 - black for text in body
+#451e06 - very dark brown for page background
+#7e4421 - brown for header and sidebar item gradients
+#ac673d - tan for sidebar background
+#7b94a9 - blue-gray for sidebar slidedown items
+#588c73 - jade hover color for sidebar slidedwon items; darker #3A6D54
+#0080c0 - Small Title color for content. #17563B, #FF5F00
+#ffdeca - Background for a hover on captions
+#a9370a - Orange-brown for text links
+
+*/
+
+/* To correct SVG output from Adobe Illustrator */
+@font-face {    
+    font-family: 'ArialMT';    
+    src:    
+        local('Arial'),    
+        local('Arial MT'),    
+        local('Arial Regular');    
+    font-weight: normal;    
+    font-style: normal;    
+}
+
+html{   /*full page background color - very dark brown*/
+	background-color: #451e06;
+	/*keep the footer and scaling behaving properly*/
+	min-height: 100%;
+	position: relative;
+	font-size: 100%;
+}
+body{
+	/*more to keep the layout stable*/
+	height: 100%;
+	font-size: 1em;
+}
+#wrapper{	/*a wrapper for the sidebar and content divs, to keep them together and the same height*/
+	min-height: 36.875em;
+	width: 56.375em;
+	overflow: auto;
+	position: relative;
+	margin: -0.438em auto 0;  /*The "auto" is to center relative to the left and right margins*/
+	background-color: #ac673d;	/*effectively the background color of the sidebar*/
+	box-shadow: 0.313em 0.313em 1.875em 0 rgba(240, 240, 255, 0.3);
+	border-radius: 3px;
+}
+#wrapperFig{   /*a wrapper for a full-width figure page without sidebar---*/
+	min-height: 30em;
+	width: 56.375em;
+	overflow: auto;
+	position: relative;
+	margin: -0.438em auto 0;
+	background-color: #ac673d;	/*effectively the background color of the sidebar*/
+	box-shadow: 0.313em 0.313em 1.875em 0 rgba(240, 240, 255, 0.3);
+	border-radius: 3px;
+}
+	
+/*----------------------Header bar styling-------------------------------------------*/
+#header{
+	height: 1.875em;
+	width: 56.375em;
+	/*stays centered at the top of the page*/
+	position: fixed;
+	top: 0;
+	left: 50%;
+	margin-left: -28.188em;
+	/*stays on top of other elements*/
+	z-index: 1000;
+	/*text and background colors*/
+	color: #ffffff;  /*--White text on darker background---*/
+	background-color: #7e4421; /*in case the gradient doesn't display*/
+	background: linear-gradient(#451e06, #7e4421);
+	box-shadow: 0 0.125em 0.313em 0 rgba(50, 50, 50, 0.4);
+	border: solid 1px #451e06;	/*I left the border thicknesses in pixels*/
+	border-radius: 3px;		/*because they render consistently otherwise*/
+}
+#search{
+	height: 1.875em;
+	margin: 0.25em;
+	float: right;
+}
+.history{	/*--Navigation arrow buttons*/
+	width: 1.875em;
+	height: 1.875em;
+	margin: 0.063em;
+	border-radius: 50px;
+	float: left;
+}
+.history:hover{
+	opacity: 0.6;
+	cursor: pointer;
+}
+#header img{  /*--For navigation arrow button images*/
+	margin: 0.225em 0.125em;
+	height: 1.363em;
+	width: 1.363em;
+}
+
+#ulWrapper{   /*To center list, perhaps only title now*/
+	width: 20.0em;
+	height: 1.2em;
+	position: absolute;
+	margin-left: 18.1875em;
+	text-align: center;
+}
+#header ul{
+	list-style-type: none;
+	margin-top: 0.313em;
+	padding: 0;
+	margin-left: 0;
+	display: inline-block;
+}
+#header li{
+	height: 1.2em;
+	float: left;
+	font: 0.875em Arial, Helvetica, sans-serif;
+	margin-right: 0;
+	border-right: 1px solid #451e06;	/*the vertical bars in the header*/
+	padding: 0 1.25em;
+	font-weight: bold;
+	text-decoration: none;
+}
+#header li:last-child{
+	border-right: none;
+}
+
+#headbutts {       /*Buttons for Figure pages, XPL, etc.-----*/
+	width: 25.0em;
+	height: 1.2em;
+	margin: 0.313em;
+	float: right;
+	font: Arial, Helvetica, sans-serif;
+}
+
+/*-----------------sidebar styling*------------------------------------------------*/
+#sidebar{
+	width: 12.563em;
+	minimum-height: 30.625em;
+	float:left;
+	margin-top: 0;
+	margin-left: 0;
+	color: #ffffff;	/*text color in the sidebar*/
+	font: 1em Arial, Helvetica, sans-serif;
+	position: fixed;
+	z-index: 4;
+	opacity: .99; /*this keeps the sidebar behind "popup" images*/
+}
+/*sidebar headings styling*/
+#sidebar span{
+	position: relative; /*will move down if menu gets bigger*/
+	margin-left: 1.0em;
+	margin-top: 1.0em;
+	font: 1em Arial, Helvetica, sans-serif;
+	line-height: 1.563em;
+	opacity: 0.8;
+}
+	
+/*--------------------Sidebar menu styling, 2 accordian menus -----------------------------------------*/
+#menu, #menu2{
+	width: 11.875em;
+	position: relative;
+	margin-left: 0.313em;
+	margin-top: 0.4em;
+	padding: 0;
+	background-color: #7b94a9;/*menu base color (blue-gray), the lightest of the three used*/
+	color: white;
+	box-shadow: 0 0.313em 0.938em 0.063em rgba(0,0,0,0.6);
+	font-family: Arial, Helvetica, sans-serif;
+	z-index: 5;
+}
+#menu ul, #menu2 ul{
+	padding: 0;
+	margin-left: 0;
+	z-index: 5;
+}
+#menu h3, #menu2 h3{
+	font-size: 0.75em;
+	line-height: 2.8em;
+	padding: 0 0.625em;
+	cursor: pointer;
+	margin: 0;
+	/*fallback for browsers without gradients*/
+	background: #451e06;/*the outer list color, the darkest*/
+	background: linear-gradient(#451e06, #7e4421);
+	z-index: 5;
+}
+#menu h3:hover, #menu2 h3:hover {
+	/*the subtle "glowing text" effect*/
+	/*text-shadow: 0 0 0.063em rgba(225,225,225,0.7);*/
+	color: #ffdeca;
+}
+#menu h3 a:link, #menu2 h3 a:link, #menu h3 a:visited, #menu2 h3 a:visited, #menu h3 a:active, #menu2 h3 a:active {
+    /*Turn off the blue color and undeline style*/
+	color: #ffffff;
+	text-decoration: none;
+}
+#menu h3 a:hover, #menu2 h3 a:hover {
+	/*the subtle "glowing text" effect*/
+	/*text-shadow: 0 0 0.063em rgba(225,225,225,0.7);*/
+	color: #ffdeca;
+}
+#menu li, #menu2 li{
+	list-style-type: none; /* No bullets */
+	z-index: 5;
+}
+#menu ul ul li a, #menu2 ul ul li a{
+	color: white;
+	text-decoration: none;
+	display: block;
+}
+
+#menu ul ul li, #menu2 ul ul li{
+	color: white;
+	text-decoration: none;
+	font-size: 0.75em;
+	line-height: 1.75em;
+	display: block;
+	padding: 0 0.938em;
+	/*transition: all 0.15s;*/
+}
+/*#menu ul ul li a:hover, #menu2 ul ul li a:hover{
+	background: #588c73;/*the hover color of the inner list, between the other two*/
+/*	border-left: 5px solid #7e4421;
+}*/
+
+
+#menu ul ul li:hover, #menu2 ul ul li:hover{
+	background: #588c73;/*the hover color of the inner list, between the other two*/
+	border-left: 5px solid #7e4421;  /*shift the selection right 5 px*/
+	cursor:pointer;
+}
+#menu ul ul, #menu2 ul ul{
+	display: none;
+}
+#menu li.active ul, #menu2 li.active ul{
+	/*Use <li class="active"> if you want all the subheadings to show*/
+	/*display: block;*/
+}
+
+/*--------------------content div styling---------------------------------------------*/
+#content{
+	width: 43.60em;
+	min-height: 30.625em;
+	padding-top: 1em;
+	padding-bottom: 1em;
+	float: right;
+	margin-top: 1.875em;
+	/*white background for the content*/
+	background-color: #ffffff;
+	/*dividing border between content and sidebar, same color as page background*/
+	border-left: solid 1px #451e06;
+	position: relative; /*so the z-index works*/
+/*	z-index: 2;*/
+	display: inline-block;
+	/*default font color for content, black*/
+	color:#000000;
+	font-family: Georgia, serif;
+	line-height: 1.3;
+}
+#content.figurePage{  /*--For figure page with sidebar------*/
+	background-color: #000000;
+}
+
+#content div.bigTitle{   /*for a large title, generally an html heading in its own div at the top of the page*/
+	margin-left: auto;
+	margin-right: auto;
+	padding: 0.01em 0.625em;
+	width: 38.8em;
+	margin-top: 1.0em;
+	color: #7e4421;
+	text-align: center;
+	box-shadow: inset 0 0 0.2em 0.2em rgba(150, 150, 150, 0.5);
+}
+
+#content div.rockTitle{   /*rock heading in its own div at the top of the page*/
+	margin-left: auto;
+	margin-right: auto;
+	padding: 0.01em 0.625em;
+	width: 38.8em;
+	margin-top: 1.0em;
+	color: #7e4421;
+	text-align: center;
+	box-shadow: inset 0 0 0.2em 0.2em rgba(150, 150, 150, 0.5);
+}
+
+#content div.rockTitle h2{   /*rock heading in its own div at the top of the page*/
+	margin-top: 0.25em;
+	margin-bottom: 0.25em;
+}
+
+
+#content div.text{    /*for divs containing mainly text*/
+	margin-left: auto;
+	margin-right: auto;
+	padding: 0.625em;
+	text-align: justify;
+	width: 38em; /*to offset the padding*/
+/*	box-shadow: inset 0 0 0.2em 0.2em rgba(150, 150, 150, 0.5);*/
+}
+
+#content div.text ul{    /*for divs containing mainly text*/
+	margin-top: 0.25em;
+	margin-bottom: 0.25em;
+}
+
+#content div.textL {    /*left column for divs containing mainly text*/
+	margin-left: 2.0em;
+	margin-right: 1.0em;
+	margin-top: 1em;
+	float: left;
+	padding: 0.625em;
+	text-align: left;
+	width:17em; /*to offset the padding*/
+}
+
+#content div.textR {    /*right column for divs containing mainly text*/
+	margin-left: 1.0em;
+	margin-right: 2.0em;
+	margin-top: 1em;
+	float: right;
+	padding: 0.625em;
+	text-align: left;
+	width:17em; /*to offset the padding*/
+}
+
+#content.figurePage div.figure{  /*Figure page with sidebar. Container for image or figure.--*/
+	width: 41.6em;
+	height: 31.2em;  /*---4:3 aspect ratio standard---*/
+	position: relative;
+	overflow: hidden;
+	margin-left: auto;
+	margin-right: auto;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+#content.figurePage div.figure_wSlider{  /*Figure page with sidebar. Container for image or figure.--*/
+	width: 41.6em;
+	height: 31.2em;  /*---4:3 aspect ratio standard---*/
+	margin-left: 1em;
+	position: relative;
+	overflow: hidden;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+#content.figurePage div.wrapSVG{  /*Figure page with sidebar. Container for image or figure.--*/
+	width: 36.22em;
+	height: 31.2em;  /*---4:3 aspect ratio standard---*/
+	background-color: #ffffff;
+	position:relative;
+	float:left;
+	overflow: hidden;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+#content.figurePage div.wrapSVG img{ 
+	position:relative;
+	z-index: 7;
+}
+
+#content.figurePage div.wrapSlider{  /*Figure page with sidebar. Container for image or figure.--*/
+	width: 5.38em;
+	height: 31.2em;  /*--for vertical slider--*/
+	background-color: #ffffff;
+	position: relative;
+	float:right;
+	overflow: visible;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+#content.figurePageLng div.figureLng{  /*Figure page with sidebar. Container for image or figure.--*/
+	width: 41.6em;
+	height: 55.47em;  /*--- 3:4 aspect ratio- --*/
+	position: relative;
+	overflow: hidden;
+	margin-left: auto;
+	margin-right: auto;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+#content.figurePage div.figure img{ /*--Figure should scale to fit height for figure page with sidebar --*/
+/*Figure page is designed for 4:3 image*/
+	position: absolute;
+	width: 100%;
+	height: auto;
+	overflow: hidden;
+}
+
+#content.figurePage div.figure object.figureSVG{ /*--SVG figure should scale to fit height for figure page with sidebar --*/
+/*Figure page is designed for 4:3 image*/
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+
+#content.figurePageLng div.figureLng img{ /*--Figure should scale to fit height for figure page with sidebar --*/
+/*Figure page is designed for 4:3 image*/
+	position: absolute;
+	width: 100%;
+	height: auto;
+}
+
+#content.figurePage div.movie {  /*Movie page with sidebar. Container for video.--*/
+	width: 41.6em;
+	min-height: 20em;  /*---4:3 aspect ratio standard---*/
+	position: relative;
+	margin-left: auto;
+	margin-right: auto;
+	font-family: Arial, Helvetica, sans-serif;
+	text-align: center;  /*Center movie in container*/
+}
+
+#content.figurePage div.text, #content.figurePageLng div.text{
+	width: 40.35em;
+	background-color: #ffdeca;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 1em;
+	text-align: justify;
+	padding: 0.625em;
+ 	box-shadow: inset 0 0 0.2em 0.2em rgba(150, 150, 150, 0.5);
+	position: relative; /*so the z-index works*/
+	z-index: 4;
+}
+
+#content div.text a{  /*for divs containing mainly text, make links a brown color only*/
+	text-decoration: none;
+	color: #A9370A;
+}
+#content div.text a:hover{
+	color: #000000;
+	text-decoration: underline;
+	text-decoration-style: dotted;
+}
+#content div.text a:visited{
+	text-decoration: none;
+}
+#content span.smallTitle{   /*for smaller titles or headings within text divs*/
+	padding-bottom: 0.5em;
+	padding-left: 0;
+	text-align: left;
+	color: #0080c0;
+	font-size: 1.2em;
+	box-shadow: none;
+}
+#content div.aside{   /*comment, side-note, or quote in-line element*/
+	margin: 0.4em;
+	margin-right: 0;
+	opacity: 0.6;
+	padding: 0 0.4em;
+	max-width: 12em;
+	border-left: 1px solid #033a5c;
+	float: right;
+}
+/*---------------------color scheme and hover effects for buttons*/
+#content button{
+	border-radius: 0.313em;
+	border: solid 1px #033a5c;
+	color: #000000;
+	background: linear-gradient(#ffffff, rgba(5,105,166,0.5));
+}
+#content button:hover, #content input[type=button]:hover{
+	box-shadow: inset 0.125em 0.188em 0.125em 0.125em rgba(0,0,0,0.2);
+	opacity: 0.7;
+	cursor: pointer;
+	background: linear-gradient(rgba(5,105,166,0.2), #ffffff);
+}
+div.buttons {
+	width: 8 em;
+	position: absolute;
+	left: 6em;
+	top: 6em;
+}
+#header button{
+	border-radius: 0.13em;
+	border: solid 1px #033a5c;
+	color: #000000;
+}
+#content button:hover, #header button:hover{
+	opacity: 0.6;
+	cursor: pointer;
+}
+
+#headbutts button{       /*Buttons for Figure pages, XPL, etc.-----*/
+	background-color: #ffffff;
+}
+
+#header a:visited, #header a:active {
+    /*Turn off the blue color and undeline style*/
+	text-decoration: none;
+}
+
+/*Padding to position anchor below fixed header------------------*/
+a.anchor {
+	display: block; 
+	position: relative; 
+	top: -35px; 
+	visibility: hidden;
+}
+
+/*----------------------------------------------*//*Inline FigureL and FigureR styling*/
+/*First the wrappers for the image and caption buttons*/
+#content div.figureL {
+	width: 19em;
+	height: 16.3em;
+	float: left;
+}
+#content div.figureR {
+	width: 19em;
+	height: 16.3em;
+	float: right;
+}
+/*Then the frame for the image 4:3 aspect ratio*/
+#content div.frameL {
+	height: 13.5em;
+	width: 18em;
+	float: left;
+	padding-bottom: 0.8em;
+	padding-top: 0.6em;
+	padding-right: 1em;
+	z-index: 5;
+}
+#content div.frameR {
+	height: 13.5em;
+	width: 18em;
+	float: right;
+	padding-bottom: 0.8em;
+	padding-top: 0.6em;
+	padding-left: 1em;
+	z-index: 5;
+}
+#content div.frame2L {
+	height: 13.5em;
+	width: 18em;
+	margin-bottom: 1em;
+	float: left;
+	z-index: 5;
+}
+
+#content div.imageChoices {
+	width: 41.6em;
+	position: relative;
+	overflow: hidden;
+	margin-left: auto;
+	margin-right: auto;
+	font-family: Georgia, serif;
+}
+
+
+#content div.frameL object.figureSVG, #content div.frameR object.figureSVG{ /*--SVG figure should scale to fit frame --*/
+/*Figure page is designed for 4:3 image*/
+	position: relative;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+
+
+/*Then instructions to fill the wrapper with the image*/
+#content div.frameL img{
+	width: 100%;
+	height: auto;
+	overflow: hidden;
+	float: left;
+}
+#content div.frameR img{
+	width: auto;
+	height: 100%;
+	overflow: hidden;
+	float: right;
+}
+#content div.frame2L img{
+	width: 100%;
+	height: auto;
+	overflow: hidden;
+	float: left;
+}
+
+#content div.imageInfoR {
+	height: 12.25em;
+	width: 21em;
+	margin-bottom: 1em;
+	float: right;
+	padding: 0.625em;
+	z-index: 5;
+}
+
+
+/*A container for the figure buttons*/
+#content div.buttsL {
+	width: 18em;
+	height: 1.2em;
+	float: left;
+	margin-top: 0.8em;
+	margin-bottom: 0.1em;
+	text-align: center;  /*Center buttons in container*/
+}
+#content div.buttsR {
+	width: 18em;
+	height: 1.2em;
+	float: right;
+	margin-top: 0.8em;
+	margin-bottom: 0.1em;
+	text-align: center;  /*Center buttons in container*/
+}
+
+/*----------------------------------------------*//*FigureL, FigureR Caption styling*/
+#content div.frameL p.captionL {
+	width: 22.5em;
+	position: relative;
+	float: left;
+	top: 0em;
+	z-index: 7;
+	text-align: left;
+	font-size: 0.8em;
+	background-color: #ffdeca;
+	border: 1px solid black;
+	padding: 0.5em;
+	box-shadow: 0 0 0.3em 0.2em rgba(0,0,0,0.4);
+	display: none;
+}
+#content div.frameR p.captionR {
+	width: 22.5em;
+	position: relative;
+	float: right;
+	top: 0em;
+	z-index: 7;
+	text-align: left;
+	font-size: 0.8em;
+	background-color: #ffdeca;
+	border: 1px solid black;
+	padding: 0.5em;
+	box-shadow: 0 0 0.3em 0.2em rgba(0,0,0,0.4);
+	display: none;
+}
+
+/*-----------------------------------------------------------------*/
+#content span.audio{
+	/*small audio buttons in the glossary and text*/
+	display: inline;
+}
+#content span.audio:hover{
+	cursor: pointer;
+	opacity: 0.7;
+}
+#content span.audio img{
+	width: 0.8em;
+	height: 0.8em;
+}
+/*--Equation image styling------------------------------------------------------------*/
+div.equation {
+	width: 38em;
+	height: 2em;
+	text-align: center;
+}
+div.equation img {
+	height: 100%;
+	width: auto;
+}
+
+/*-----------------------------------------------------------------*/
+/*#content div.feedbackLink{
+	/*link to the feedback page at the bottom*/
+/*	padding: 0.625em;
+	box-shadow: none;
+}
+#content div.feedbackLink a{
+	text-decoration: underline;
+	color: #0080c0;
+	font: 1em Arial, Helvetica, sans-serif;
+}
+#content div.feedbackLink a:hover{
+	.tex-decoration: none;
+}*/
+/*------------------------------Full page figure no sidebar styling*/
+#wideFigure{
+	width: 56.375em;
+	min-height: 30.625em;
+	margin-top: 1em;
+	font-family: Arial, Helvetica, sans-serif;
+	line-height: 1.3;
+	padding-top: 1em;
+	padding-bottom: 1em;
+	/*black background for the photos*/
+	background-color: #000000;
+	position: relative; /*so the z-index works*/
+	
+	z-index: 2;
+}
+#wideFigure div.twoImages{
+	/*Full page image or figure container*/
+	width: 56.375em;
+	height: 28.0em;
+	margin-top: 1em;
+	position: relative;
+}
+
+#wideFigure div.twoImages1{
+	/*Full page image or figure container*/
+	width: 56.375em;
+	height: 37.5em;
+	margin-top: 1em;
+	position: relative;
+}
+
+#wideFigure div.text{
+	width: 52.75em;
+	background-color: #ffdeca;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 1em;
+	text-align: justify;
+	padding: 0.625em;
+}
+
+#leftImage{
+	width: 28.1875em;
+	height: 28.0em;
+	top: -1.0em;
+	position: relative;
+	float: left;
+	background-color: #ffffff;
+}
+
+#leftOverImage{
+	width: 28.1875em;
+	height: 28.0em;
+	top: -1.0em;
+	position: absolute;
+	float: left;
+	background-color: #ffffff;
+	visibility: hidden;
+	z-index: 20;
+}
+
+#leftImage1{
+	width: 50.0em;
+	height: 37.5em;
+	position: relative;
+	float: left;
+	background-color: #ffffff;
+}
+
+#leftImage2{
+	width: 56.375em;
+	height: 37.5em;
+	position: relative;
+	float: left;
+	background-color: #ffffff;
+}
+
+#rightImage{
+	width: 28.1875em;
+	height: 28.0em;
+	position: relative;
+	top: -1.0em;
+	float: right;
+	background-color: #ffffff;
+}
+
+#rightImage1{
+	width: 6.375em;
+	height: 37.5em;
+	position: relative;
+	float: left;
+	background-color: #ffffff;
+}
+
+#rightImage2{
+	width: 420px;
+	height: 440px;
+	position: absolute;
+	top: 60px;
+	left:470px;
+	visibility: hidden;
+	background-color: #ffffff;
+	z-index: 9;
+}
+
+#AFM_1{
+	position: absolute;
+	z-index: 5;
+}
+
+#AFM_2{
+	position: absolute;
+	z-index: 4;
+	visibility: hidden;
+}
+
+/*#figure{
+	width: 56.375em;
+	min-height: 30.625em;
+	padding-top: 1.25em;
+	padding-bottom: 1.125em;
+	margin-top: 1em;
+	font-family: Georgia, serif;
+	line-height: 1.3;
+	/*black background for the photos*/
+/*	background-color: #000000;
+	position: relative; /*so the z-index works*/
+	
+/*	z-index: 2;
+}
+#figure div.figure{
+	/*Full page image or figure container*/
+/*	width: 54.0em;
+	min-height: 36.0em;
+	position: relative;
+	overflow: hidden;
+	margin-top: 1em;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+
+#figure div.figure img{
+	position: absolute;
+	width: 100%;
+	height: auto;
+}
+
+#figure div.text{
+	width: 52.75em;
+	background-color: #ffdeca;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 1em;
+	text-align: justify;
+	padding: 0.625em;
+/*	box-shadow: inset 0 0 0.2em 0.2em rgba(150, 150, 150, 0.5);*/
+/*	position: relative; /*so the z-index works*/
+/*	z-index: 4;
+
+}
+
+/*-----------------------------------------------------------------*//*Cover banner image styling*/
+#banner{
+	height: 14em;
+	width: 40.0em;
+}
+
+#banner img{
+/*stretch to fill banner width, do not distort div*/
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+
+/*-----------------------------------------------------------------*//*Chapter banner image styling*/
+/*First the wrapper for the whole banner*/
+#bannerChap {
+	position: relative;
+	width: 40em;
+	height: 14em;
+	left: 1.8em;
+}
+/*Then the wrapper for the image 3:2 aspect ratio*/
+#bannerChap div.figureB1 {
+	height: 14em;
+	width: 21em;
+	margin-left: auto;
+    margin-right: auto;
+	z-index: 5;
+}
+
+#bannerChap figure.figureB1 {
+	height: 14em;
+	width: 21em;
+	margin-left: auto;
+    margin-right: auto;
+	z-index: 5;
+}
+
+/*Then instructions to fill the wrapper with the image*/
+#bannerChap div.figureB1 img{
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+
+/*Then instructions to fill the wrapper with the image*/
+#bannerChap figure.figureB1 img{
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+
+/*-----------------------------------------------------------------*//*Banner Caption styling*/
+div.figureB1 p.caption {
+    position: absolute;
+	width: 12em;
+	left: 0em;
+	top: 2em;
+	z-index: 7;
+	text-align: left;
+	font-size: 0.8em;
+	background-color: #ffdeca;
+	border: 1px solid black;
+	padding: 0.5em;
+	box-shadow: 0 0 0.3em 0.2em rgba(0,0,0,0.4);
+	display: none;
+}
+
+figure.figureB1 p.caption {
+    position: absolute;
+	width: 12em;
+	left: 0em;
+	top: 2em;
+	z-index: 7;
+	text-align: left;
+	font-size: 0.8em;
+	background-color: #ffdeca;
+	border: 1px solid black;
+	padding: 0.5em;
+	box-shadow: 0 0 0.3em 0.2em rgba(0,0,0,0.4);
+	display: none;
+}
+
+
+/*-----------------------------------------Buttons to enlarge banner image and show caption--------------*/
+#bannerChap div.butWrap {
+    position: absolute;
+	width: 8em;
+	height: 8em;
+	bottom: 2em;
+	right: 2em;
+	z-index: 5;
+}
+
+button.captionBbut {
+	position: absolute;
+	right: 2em;
+	bottom: 4em;
+	z-index: 7;
+}
+
+button.enlargeBbut {
+	position: absolute;
+	right: 2em;
+	bottom: 7em;
+	z-index: 7;
+}
+
+button.closeBbut {
+	position: absolute;
+	right: 0.3em;
+	top: 0.3em;
+	z-index: 11;
+	font-size: 1.0em;
+	background-color: #e9e9e9;
+	border: 1px solid black;
+	box-shadow: 0 0 0.3em 0.2em rgba(0,0,0,0.4);
+}
+
+/*Instructions for Chapter Banner enlarged image --------------------------*/
+#bannerChapLrg {
+	position: fixed;
+  	top: 50%;
+  	left: 50%;
+  	transform: translate(-50%, -50%);
+	width: 48em;
+	height: 32em;
+	z-index: 10;
+	display: none;
+	box-shadow: 0 0 24em 24em rgba(0,0,0,1.0);
+}
+
+#bannerChapLrg img{ 
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+
+#captionB1L {
+	position: absolute;
+	bottom: -4.5em;
+	text-align: left;
+	font-size: 0.8em;
+	background-color: #e9e9e9;
+	border: 1px solid black;
+	padding: 0.5em;
+	box-shadow: 0 0 0.3em 0.2em rgba(0,0,0,0.4);
+}
+
+/*-----------------------------------------------------------------*/
+/* Footer Styling*/
+
+#footer{
+	width: 64em;
+	height: 2.5em;
+	background-color: #cb8f6b;/*in case the gradient doesn't display*/
+	background: linear-gradient(#ac673d, #cb8f6b);
+	position: relative;
+	margin: 0.625em auto 0;
+	z-index: 3;
+	font: 0.875em Arial, Helvetica, sans-serif;
+	font-weight: bold;
+	border-radius: 3px;
+}
+
+#footer span:nth-child(1){
+	/*left column of text, slightly indented*/
+	position: absolute;
+	left: 0.625em;
+	top: 0.625em;
+}
+
+#titleWrapper{
+	position:absolute;
+	left: 23em;
+	top: 0.5em;
+	font: 1.1em Arial, Helvetica, sans-serif;
+	color: #ffffff;
+	font-weight: bold;
+	text-align: center;
+}
+
+#footer span:nth-child(3){
+	/*right column of text, given more space*/
+	position: absolute;
+	right: 0.625em;
+	top: 0.625em;
+}
+
+#footer span a:link, #footer span a:visited, #footer span a:active {
+    /*Turn off the blue color and undeline style*/
+	color: #000000;
+	text-decoration: none;
+}
+
+#footer span a:hover{
+	/*background-color: #eee;
+	color: #7b94a9;*/
+	text-shadow: 0.125em 0.125em 0.125em rgba(0,0,0,0.3);
+	cursor: pointer;
+}
+
+/*-----------------------------------------------------------------*/
+input:focus {
+	border: 2px solid #a9370a;
+	border-radius: 3px;
+}
+
+/*Table syling with common borders--*/
+table, th, td {
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:1em;
+	text-align:center;
+	margin-left:auto;
+	margin-right:auto;
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+/*----------------------------------*//*Instructions for feedback screen overlay */
+/*-------------------------Align the feedback window in the center of the screen--*/
+#content div.feedback {
+	position: fixed;
+  	top: 40%;
+  	left: 50%;
+  	transform: translate(-50%, -50%);
+	width: 34em;
+	height: 20em;
+	z-index: 8;
+	background-color: #ffffff;
+	box-shadow: 0 0 2em 4em rgba(0,0,0,0.8);
+}
+#content div.feedback img{ 
+	width: 100%;
+	height: auto;
+	overflow: hidden;
+}
+#content div.feedback div.textBack {
+	position: relative;
+	top: 50%;
+	transform: translateY(-50%);
+	margin-left: auto;
+	margin-right: auto;
+	width: 31em;
+	height: 17em;
+	z-index: 11;
+	background-color: #ffdeca;
+	border: 2px solid black;
+	padding: 0.5em;
+	box-shadow: 0 0 0.3em 0.2em rgba(0,0,0,1);
+}
+
+/*---To align the text in the center of the feedback division -----*/
+#content div.feedback div.textBack p{
+	position: relative;
+	top: 50%;
+	transform: translateY(-50%);
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+}
+button.closeFeedbut {
+/*--	position: fixed;
+	right: 0.3em;
+	top: 0.3em;  --*/
+	z-index: 11;
+	font-size: 0.6em;
+	background-color: #e9e9e9;
+	border: 1px solid black;
+	box-shadow: 0 0 0.2em 0.1em rgba(0,0,0,0.8);
+}
+
+/*----------------------This is a style sheet for a d3scatter plot  */
+.axis path {
+	fill: none;
+	stroke-width: 1;
+	
+}
+
+.axis line {
+  fill: none;
+  stroke: lightgrey;
+  stroke-opacity: 0.9;
+  stroke-width: 1;
+  shape-rendering: crispEdges;
+}
+
+.grid line {
+  stroke: #cccccc;
+  stroke-opacity: 0.9;
+  shape-rendering: crispEdges;
+}
+
+.grid path {
+  stroke-width: 0;
+}
+
+.dot {
+  stroke: #000;
+}
+
+.tooltip {
+  position: absolute;
+  width: 180px;
+  height: 60px;
+  padding: 5px;
+  pointer-events: none;
+}
+
+.line {
+/*    stroke: blue;*/
+    fill:none;
+    stroke-width: 3;
+}
+
+/*------------------------------Full page figure no sidebar styling*/
+#wideFigured3{
+	width: 56.375em;
+	min-height: 30.625em;
+	margin-top: 1em;
+	font-family: Arial, Helvetica, sans-serif;
+	padding-top: 1em;
+	padding-bottom: 1em;
+	/*black background for the photos*/
+	background-color: #000000;
+	position: relative; /*so the z-index works*/
+	
+	z-index: 2;
+}
+#wideFigured3 div.text{
+	width: 52.75em;
+	background-color: #ffdeca;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 1em;
+	text-align: justify;
+	padding: 0.625em;
+}
+
+.wideImaged3 {
+	width: 667px;
+	height: 500px;
+}
+
+
+#plot {
+	width: 667px;
+	height: 500px;
+	float: left;
+}
+
+
+
+#plotTri {
+	width: 580px;
+	height: 500px;
+	float: left;
+}
+
+#selectX {
+	width: 64px;
+	height: 500px;
+	float: left;
+	font-size: 80%;
+}
+#selectY {
+	width: 64px;
+	height: 500px;
+	float: left;
+	font-size: 80%;
+}
+#selectZ {
+	width: 64px;
+	height: 500px;
+	float: left;
+	font-size: 80%;
+}
+#selectCsv {
+	width: 105px;
+	height: 500px;
+	float: left;
+	font-size: 80%;
+}
+#selectCsvTri {
+	width: 110px;
+	height: 500px;
+	float: left;
+	font-size: 80%;
+}
+
+#el08 { /* Change width and height of radio button */
+width:20px;
+height:20px;
+}
+
+.noselect {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+rect {
+  fill: #ddd;
+}
+
+
+rect.zoom {
+  stroke: steelblue;
+  fill-opacity: 0.5;
+}
+
+.tick {
+	color: red;
+}

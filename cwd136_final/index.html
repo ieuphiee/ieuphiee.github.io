@@ -1,0 +1,144 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="stylesheet.css">
+<link href="https://fonts.googleapis.com/css?family=Merriweather|Oswald|PT+Sans|Roboto+Slab:300" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<link rel="stylesheet" type="text/css" href="slick/slick.css"/>
+<link rel="stylesheet" type="text/css" href="slick/slick-theme.css"/>
+<script src="slider.js"></script>
+</head>
+<body>
+
+<div class="viz-1">
+  <div class="title">
+    <span class="border">HOW TO BECOME YOUTUBE FAMOUS</span>
+    <h2><br>using word clouds to visualize how key words affect video popularity</h2>
+  </div>
+</div>
+
+<div class="subtitle">
+ <span class="container">
+	 <p>Does clickbait work?</p>
+	 <p>I first started this project in order to see if there was any correlation between key words in video titles and video popularity. As I dug further into the data, the project became more of an exploratory analysis to extract the most statistically interesting results. The following is a series of word cloud visualizations that showcases such iterative process.</p> 
+	 <p>The data comes from Mitchell J's <a href="https://www.kaggle.com/datasnaek/youtube-new" alt="Trending YouTube Video Statistics">Trending YouTube Video Statistics</a> datasets which is a collection of (up to) 200 listed trending Youtube videos every day in the United States, United Kingdom, Canada, Germany, and France. The datasets are updated every few days and includes information such as video titles, channel name, number of views, number of comments, number of likes and dislikes, and etc.</p>
+	 <p>For the sake of simplifying the data, I chose to only look at the US dataset, and the data only includes videos featured from <u>November 14, 2017 to December 12, 2017</u>.</p>
+	</span>
+</div>
+
+<div class="viz-2">
+  <div class="details-container">
+  	
+	
+   <div class="img-wrapper">
+	   <div class="slider">
+   			<div class="guider"><h3>What is <b>popular</b>?</h3></div>
+   			<div class="guider"><p class="say">Lots of factors can contribute to the success or popularity of a Youtube video: number of views, level of engagement, ratio of likes to dislikes, ratio of views to subscribers, etc.</p>
+			<p class="say">Lets start by finding out which videos are grabbing most people's attention by looking at the <b>number of views</b> as the determinant for popularity.</p>
+   			<h4>&#62;</h4>
+   			</div>
+	   		<figure><img src="images/belowAvg-caseSen-blue.png"><figcaption>titles with &#60; average # of views</figcaption></figure>
+			<figure><img src="images/aboveAvg-caseSen.png"><figcaption>titles with &#62; titles average # of views</figcaption></figure>
+			
+			<div class="guider"><h3>What did you <b>notice</b>?</h3></div>
+   			<div class="guider"><p class="say">The pair of word clouds generated before show the most frequently used words in video titles with below average number of views (left) and with above average number of views (right).</p>
+			<p>Some words appear in both clouds and some appear multiple times in one cloud. For example, the word "official" appears many times in the right cloud and also shows up in both clouds. This suggests that for this particular dataset, such "repeat" words tend to appear very frequently in video titles, and thus are not particularly meaningful. It also makes sense that words like "Christmas" and "iPhone" (referring to the release of the iPhone X) are popular during this period of time. Overall, there are no striking differences between the two word clouds, so the results are not particularly interesting. In the next set of word clouds, lets filter out non-meaningful words like "official" and "christmas", which we will call our "repeat-offenders."</p>
+   			</div>
+			<figure><img src="images/belowAvgViews-filtered.png"><figcaption>titles with &#60; average # of views (filtered)</figcaption></figure>
+			<figure><img src="images/aboveAvgViews-filtered.png"><figcaption>titles with &#62; average # of views (filtered)</figcaption></figure>
+			<div class="guider"><h3>Doing better: tighter bounds</h3></div>
+   			<div class="guider">
+			<p>It seems like using the average as the lower-upper bounds threshold isn't producing very interesting results. Lets tighten the bounds by discarding all video titles in the 2nd quartile. Remember, we only care about the best and the worst.</p>
+			<p>The following set of word clouds show only the words in the bottom 25th and top 25th percentile of # of views.</p></div>
+			<figure><img src="images/bottom25Views.png"><figcaption>words in the bottom 25th percentile of # of views (filtered)</figcaption></figure>
+			<figure><img src="images/top25Views.png"><figcaption>words in the top 25th percentile of # of views (filtered)</figcaption></figure>
+	   </div>
+	</div>
+  </div>
+</div>
+
+
+<div class="viz-3">
+  <div class="details-container">
+  	
+  	
+   <div class="img-wrapper">
+   		<div class="slider">
+			<div class="guider"><h3>What are people <b>talking</b> about?💬 </h3></div>
+   			<div class="guider"><p class="say">Another determinant for popularity is how high engagement is. In other words, what is controversial? What are most people talking about?</p>
+			<p class="say">In the following set of word clouds, we will strictly look at the ratio of comments to views.</p>
+  			<h4>&#62;</h4>
+  			</div>
+   			<figure><img src="images/belowAvgCTV.png"><figcaption>titles with &#60; average comments to views ratio</figcaption></figure>
+    		<figure><img src="images/aboveAvgCTV.png"><figcaption>titles with &#62; average comments to views ratio</figcaption></figure>
+    		<div class="guider"><h3>What did you <b>notice</b>?</h3></div>
+   			<div class="guider"><p class="say">The pair of word clouds generated before show the most frequently used words in video titles with below average comments to views ratio (left) and with above average comments to views ratio (right).</p>
+			<p>Hm, interesting. Off the bat, the most striking difference is that there seems to be a greater variety of words in this set of word clouds compared to the word clouds above. If you didn't notice, feel free to scroll to the second set of word clouds in the slider above and compare!<br><br>
+  			What could be the cause of this dramatic difference? Turns out that basing our word clouds strictly on the ratio of comments-to-views is not entirely accurate. Videos with fewer views could have very high comments-to-views ratios thus earning them a higher rank, while videos with more views could have lower comments-to-views ratios, thus earning them a lower rank. So while the previous set of word clouds produced interesting results, they are not entirely accurate. <br><br>
+  			If we want to take into consideration both a video's number of views as well as its number of comments, we can use a scalar. The following set of word clouds were generated using a 50-50 scalar, where both number of views and number of comments were weighted equally.
+  			</p>
+   			</div>
+   			<figure><img src="images/belowAvgScalarComments.png"><figcaption>titles with &#60; average # of comments + views</figcaption></figure>
+    		<figure><img src="images/aboveAvgScalarComments.png"><figcaption>titles with &#62; average # of comments + views</figcaption></figure>
+    		<div class="guider"><h3>What about now?</h3></div>
+   			<div class="guider">
+			<p>While there may not be any striking differences between these two clouds, there is something a bit more interesting to glean from by comparing these clouds with the second set of clouds that were generated above.</p> 
+    		<p>For example, if we compare only the right clouds (&#62; than average), we can see video titles containing sports related words such as "NFL", "Week", "Game", and "Highlights" attracted more comments than titles containing the word "iPhone". On the same note words that appear larger in both right clouds suggest those video titles not only attracted many views but also had higher levels of engagement.
+			</p></div>
+			<div class="guider"><h3>Doing better: tighter bounds</h3></div>
+   			<div class="guider">
+			<p>So far, the last two sets of word clouds have proven to be more promising. But, lets try to do better by tightening the bounds by discarding all video titles in the 2nd quartile. Remember, we only care about the best and the worst.</p>
+			<p>The following set of word clouds show only the words in the bottom 25th and top 25th percentile of # of comments + views.</p></div>
+			<figure><img src="images/bottom25Comments.png"><figcaption>words in the bottom 25th percentile of # of comments + views</figcaption></figure>
+			<figure><img src="images/top25Comments.png"><figcaption>words in the top 25th percentile of # of comments + views</figcaption></figure>
+	   </div>
+	</div>
+  </div>
+</div>
+
+
+<div class="viz-4">
+  <div class="details-container">
+  	
+	  
+	  
+   <div class="img-wrapper">
+      	<div class="slider">
+			<div class="guider"><h3>What do people <b>like?👍</b></h3></div>
+   			<div class="guider"><p class="say">Finally, lets look at the last determinant for popularity -- likes! A good indicator of a popular video is whether people find your videos enjoyable or informative. In the following set of word clouds, we will strictly look at the ratio of likes to views.</p>
+   			<h4>&#62;</h4>
+   			</div>
+		  	<figure><img src="images/belowAvgLTV2.png"><figcaption>titles with &#60; average # likes to views ratio</figcaption></figure>
+			<figure><img src="images/aboveAvgLTV.png"><figcaption>titles with &#62; average # likes to views ratio</figcaption></figure>
+			<div class="guider"><h3>What did you <b>notice</b>?</h3></div>
+   			<div class="guider"><p class="say">The pair of word clouds generated before show the most frequently used words in video titles with below average likes to views ratio (left) and with above average likes to views ratio (right).</p>
+			<p>Once again, basing our word clouds strictly on a ratio produces very interesting results. But, we can do better using a scalar.<br><br>
+  			Lets take into consideration both a video's number of views as well as its number of likes. The following set of word clouds were generated using a 50-50 scalar, where both number of views and number of likes were weighted equally.
+  			</p>
+   			</div>
+			<figure><img src="images/belowAvgScalarLikes.png"><figcaption>titles with &#60; average # of likes + views</figcaption></figure>
+			<figure><img src="images/aboveAvgScalarLikes.png"><figcaption>titles with &#62; average # of likes + views</figcaption></figure>
+			<div class="guider"><h3>Doing better: tighter bounds</h3></div>
+   			<div class="guider">
+			<p>Once again, lets tighten the bounds by discarding all video titles in the 2nd quartile. Remember, we only care about the best and the worst.</p>
+			<p>The following set of word clouds show only the words in the bottom and top 25th percentile of # of likes + views.</p></div>
+			<figure><img src="images/bottom25Likes.png"><figcaption>words in the bottom 25th percentile of # of likes + views</figcaption></figure>
+			<figure><img src="images/top25Likes.png"><figcaption>words in the top 25th percentile of # of likes + views</figcaption></figure>
+	   </div>
+	</div>
+  </div>
+</div>
+
+<div class="description" style="bottom:-2em">
+ <span class="container">
+    
+	</span>
+</div>
+
+<script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+<script type="text/javascript" src="slick/slick.min.js"></script>
+
+</body>
+</html>

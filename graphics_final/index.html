@@ -1,0 +1,336 @@
+
+<!DOCTYPE html>
+<head>
+<title>Final Project - Kirby Chase</title>
+<script src="three.min.js"></script>
+<script src="KeyboardState.js"></script>
+<script src="OrbitControls.js"></script>
+
+<script>
+    var keyboard = new KeyboardState();
+    var loader = new THREE.JSONLoader();
+    var controls;
+    var scene, camera, renderer, canvas; 
+    var star, kirby, kirbyFeet, house, tree, car, road, scarfy;
+    var kirbyContainer = new THREE.Object3D();
+    var kirbyBox, scarfyBox;
+    var carsList = new Array();
+    var cloud;
+    var cloudsList = new Array();
+    var counter = 0;
+
+
+    function loadFigures() {
+
+        /** Load Kirby model */
+        loader.load('kirby.json', function(geometry, materials) {
+            var material = new THREE.MultiMaterial( materials ); 
+            kirby = new THREE.Mesh( geometry, material ); 
+            kirby.position.set(0, -1, -5);
+            kirbyContainer.add(kirby);
+            kirbyBox = new THREE.Box3().setFromObject(kirbyContainer);
+            console.log(kirbyBox.min);
+        });
+
+        /** Load the star Kirby sits on */
+        loader.load('kirby-star.json', function(geometry, materials) {
+            var material = new THREE.MultiMaterial( materials ); 
+            star = new THREE.Mesh( geometry, material ); 
+            star.position.set(0, -0.5, -3.3);
+            kirbyContainer.add(star);            
+        });
+
+        /** Set position of kirby container and rotate so that it faces forward, add to scene */
+        kirbyContainer.position.set(-9.5, 1.5, 24); 
+        kirbyContainer.rotation.y = Math.PI; 
+        scene.add(kirbyContainer);
+
+        /** Load our antagonist Scarfy */
+        loader.load('scarfy.json', function(geometry, materials) {
+            var material = new THREE.MultiMaterial( materials ); 
+            scarfy = new THREE.Mesh( geometry, material ); 
+            scarfy.position.set(0, 2, -3.3);
+            scene.add(scarfy); 
+            scarfyBox = new THREE.Box3().setFromObject(scarfy);
+        });
+
+    }
+
+    /** Load any objects with texture */
+    function loadWTextures(obj, fileO, fileT, x, y, z, rotateY) {
+
+        var texture = THREE.ImageUtils.loadTexture(fileT);
+        loader.load(fileO, function(geometry, materials) {
+            var materialM = new THREE.MeshPhongMaterial( { map: texture } );      
+            obj = new THREE.Mesh( geometry, materialM ); 
+            obj.position.set(x,y,z);
+            obj.rotation.y = rotateY;
+            scene.add(obj);
+        });
+
+    }
+
+    function loadTree(fileO, x, y, z) {    
+        loader.load(fileO, function(geometry, materials) {
+            var material = new THREE.MultiMaterial( materials ); 
+            tree = new THREE.Mesh( geometry, material ); 
+            var scale = Math.random() * (2 - 0.5) + 0.5;
+            tree.position.set(x,1,z);
+            tree.scale.set(scale, scale, scale);
+            scene.add(tree);
+        });
+    }
+    
+    /** We need a separate function to the load cars; in order to add it to the array */
+    function loadCar(x, y, z, rotateY) {
+        var carTex = THREE.ImageUtils.loadTexture("carTex2.png");
+        loader.load('car.json', function(geometry, materials) {
+            var materialM = new THREE.MeshPhongMaterial( { map:carTex } );      
+            car = new THREE.Mesh( geometry, materialM ); 
+            car.position.set(x,y,z);
+            car.rotation.y = rotateY;
+            carsList.push(car);
+            scene.add(car);
+        });
+
+    }
+
+    /** We need a separate function to load the clouds; in order to add it to the array */
+    function loadCloud() {
+        loader.load('cloud.json', function(geometry, materials) {
+            var material = new THREE.MultiMaterial( materials ); 
+            cloud = new THREE.Mesh( geometry, material ); 
+            var x = Math.floor(Math.random() * 50) - 25;
+            var z = Math.floor(Math.random() * 50) - 25;
+            cloud.position.set(x, 15, z);
+            var scale = Math.random() * (2 - 0.5) + 0.5;
+            cloud.scale.set(scale, scale, scale);
+            cloudsList.push(cloud);
+            scene.add(cloud);
+        });
+
+    }
+
+    function createWorld() {
+ 
+        renderer.setClearColor(0); 
+        scene = new THREE.Scene();
+        scene.background = new THREE.Color( 0xeeeeee );
+        camera = new THREE.PerspectiveCamera(70, canvas.width/canvas.height, 1, 100);
+        camera.position.set(-9.5, 1.5, 30);
+
+        /** Set up the grassy plane */
+        var loader = new THREE.TextureLoader();
+        var grassTexture = loader.load('grassTex.jpg');
+        var grassMaterial = new THREE.MeshPhongMaterial( { map: grassTexture });
+        grassTexture.wrapS = THREE.RepeatWrapping;
+        grassTexture.wrapT = THREE.RepeatWrapping;
+        grassTexture.repeat.set( 10, 8);
+        var plane = new THREE.Mesh( new THREE.PlaneGeometry(55,50), grassMaterial );
+        plane.rotation.set(-Math.PI/2, 0, 0); 
+        scene.add( plane );
+
+        /** Add some lighting to our world */
+        var ambientLight = new THREE.AmbientLight("white");
+        scene.add(ambientLight);
+        ambientLight.intensity = 0.5;
+        var dirLight = new THREE.DirectionalLight( 0xffffff );
+        dirLight.position.set( 1, 1, 1 );
+        scene.add(dirLight);
+
+        /** Load all our Blender models here */
+
+        loadFigures(); // Load characters Kirby, Scarfy
+
+        /** Set up layout of the roads */
+        var zRoad = 22;
+        var xRoad = -24.5;
+        for (i = 0; i < 8; i++) {
+            loadWTextures(road, 'road.json', 'roadTex.jpg', -10, 0.1, zRoad, Math.PI/2);
+            loadWTextures(road, 'road.json', 'roadTex.jpg', 11.5, 0.1, zRoad, Math.PI/2);
+            loadWTextures(road, 'road.json', 'roadTex.jpg', xRoad, 0.1, -17, 0);
+            zRoad -= 5;
+            xRoad += 5; 
+        }
+
+        /** Set up grid of houses */
+        var zHouse = 22;
+        var xHouse = -19;
+        for (i = 0; i < 4; i++) {
+            loadWTextures(house, 'house5.json', 'houseTex5.png', -15, 3.2, zHouse, Math.PI/2);
+            loadWTextures(house, 'house5.json', 'houseTex3.png', 15, 3.2, zHouse, -Math.PI/2);
+            zHouse -= 5;
+            loadWTextures(house, 'house5.json', 'houseTex3.png', -15, 3.2, zHouse, Math.PI/2);
+            loadWTextures(house, 'house5.json', 'houseTex5.png', 15, 3.2, zHouse, -Math.PI/2);
+            zHouse -= 5;
+        }
+
+        /** Set up cars */
+        var zCar = 22;
+        for (i = 0; i < 5; i++) {
+            loadCar(-10, 0.8, zCar,-Math.PI/2);
+            zCar -= 10;
+        }
+
+        /** Floating clouds */
+        for (i = 0; i < 30; i++) {
+            loadCloud();
+        }
+        /** Create random trees */
+        zTree = 22;
+        for (i = 0; i < 12; i++) {
+            loadTree('tree.json', -6, 1.8, zTree);
+            loadTree('tree.json', 6, 1.8, zTree);
+            loadTree('tree3.json', -20, 1.5, zTree);
+            loadTree('tree3.json', 20, 1.5, zTree);
+            loadTree('tree2.json', -25, 1.8, zTree);
+            loadTree('tree2.json', 25, 1.8, zTree);
+            zTree -= 3;
+
+        }
+
+        /** For controlling camera movements using the trackpad */
+        window.addEventListener('resize', function() {
+              var WIDTH = window.innerWidth, HEIGHT = window.innerHeight;
+              renderer.setSize(WIDTH, HEIGHT);
+              camera.aspect = WIDTH / HEIGHT;
+              camera.updateProjectionMatrix();
+        });
+
+        controls = new THREE.OrbitControls(camera, renderer.domElement);
+		
+    }
+
+    /** Controls keyboard input */
+    function update() {
+
+        keyboard.update();
+
+        // Forward
+        if ( keyboard.pressed("W") ) {
+            kirbyContainer.position.z += -0.1;
+            kirbyBox = kirbyBox.setFromObject(kirbyContainer);
+        }
+
+        // Upward 
+        if ( keyboard.pressed("I")) {
+            kirbyContainer.position.y += 0.1;
+            kirbyBox = kirbyBox.setFromObject(kirbyContainer);
+        }
+
+        // Downward
+        if ( keyboard.pressed("S") ) {
+            kirbyContainer.position.z += 0.1;
+            kirbyBox = kirbyBox.setFromObject(kirbyContainer);
+        }
+
+        // Downard rotation
+        if ( keyboard.pressed("K")) {
+            kirbyContainer.position.y -= 0.1;
+            kirbyBox = kirbyBox.setFromObject(kirbyContainer);
+        }
+
+
+        // Leftward
+        if ( keyboard.pressed("A")) {
+            kirbyContainer.position.x += -0.1;
+            kirbyBox = kirbyBox.setFromObject(kirbyContainer);
+        }
+
+    
+        // Rightward
+        if ( keyboard.pressed("D")) {
+            kirbyContainer.position.x += 0.1;
+            kirbyBox = kirbyBox.setFromObject(kirbyContainer);
+        }
+
+    }
+
+
+    function render() {
+
+        requestAnimationFrame( render );
+
+        /** Rotate the star under Kirby's feet */
+        star.rotation.y += .04;
+
+        /** Creating moving cars */
+        for (i = 0; i < carsList.length; i++) {
+            iCar = carsList[i];
+            if (iCar.position.x < 10 && iCar.position.z > -16) {
+                carsList[i].position.z -= 0.1;
+            }
+            if (iCar.position.z <= -16) {
+                iCar.position.x += 0.1;
+                iCar.rotation.y = Math.PI;
+            }
+            if (iCar.position.x >= 10.5) {
+                iCar.position.z += 0.1;
+                iCar.rotation.y = Math.PI/2;
+            }
+            if (iCar.position.x >= 10.5 && iCar.position.z >= 23) {
+                iCar.position.set(-10,0.8,22);
+                iCar.rotation.y = -Math.PI/2;
+            }
+        }
+
+        for (i = 0; i < cloudsList.length; i++) {
+            cloud = cloudsList[i];
+            if (cloud.position.x >= 25) {
+                cloud.position.x = -25;
+            }
+            cloud.position.x += 0.01;
+        }
+        /** Collision detection */
+        var collision = kirbyBox.intersectsBox(scarfyBox);
+        if (collision) {
+            alert("You caught him!");
+            kirbyContainer.position.set(-9.5, 1.5, 24);  // Reset Kirby's position
+        }
+
+
+        // Scarfy's movements
+        scarfy.rotation.y += 0.1;
+        if (counter%200 == 0) {
+            x = Math.floor(Math.random() * 50) - 25;
+            y = Math.random() * (10 - 1) + 1;
+            z = Math.floor(Math.random() * 50) - 25;
+            scarfy.position.set(x,y,z);
+            scarfyBox.setFromObject(scarfy);
+        }
+
+        counter++;
+        update();
+
+        renderer.render(scene, camera);
+        controls.update();
+    }
+
+    //----------------------------------------------------------------------------------
+
+    
+    function init() {
+        try {
+            canvas = document.getElementById("glcanvas");
+            renderer = new THREE.WebGLRenderer( { canvas: canvas, antialias: true} );
+            document.body.appendChild(renderer.domElement);
+             
+        }
+        catch (e) {
+            document.getElementById("canvas-holder").innerHTML = "<h3><b>WebGL is not available.</b><h3>";
+            return;
+        }
+    
+        createWorld();
+        render();
+    }
+
+</script>
+
+</head>
+<body onload="init()">
+<div id="canvas-holder">
+    <canvas id="glcanvas" width="600" height="400"></canvas>
+</div>
+</body>
+</html>
