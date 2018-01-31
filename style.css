@@ -1,9 +1,69 @@
 body {
+	background-image: url(concrete_seamless.png);
+	background-repeat: repeat;
 	font-family: 'Roboto', sans-serif;	
-	font-size: 12pt;
+	font-size: 12px;
 	
 }
 
+ul {
+	list-style-type: circle;
+}
+
 a {
+	color: #00A8FF;
 	text-decoration: none;
+	transition: all 0.2s linear;
+}
+
+a:hover {
+	color: #0088cc;
+}
+
+#container {
+	width: 500px;
+	height: 200px;
+	position: relative;
+	background: #FFFFFF;
+	margin: 200px auto;
+	padding: 10px;
+	text-align: justify;
+	border-top: 5px #FF3636 solid;
+	border-radius: 10px;
+}
+
+#title {
+	position: absolute;
+	top: -45px;
+	left: 150px;
+	font-family: 'Sanchez', serif;
+	text-transform: uppercase;
+	font-weight: bold;
+	font-size: 3.25em;
+}
+
+#nav {
+	position: absolute;
+	left: 31%;
+	width: 50px;
+	height: 220px;
+	padding: 5px;
+}
+
+#nav a {
+	font-family: 'Inconsolata', monospace;
+	font-size: 12pt;
+	color: #000000;	
+	text-transform: uppercase;
+	display: block;
+	width: 100%;
+	margin: 2px 0px 3px 0px;
+	padding: 10px;
+	border: 1px solid #E0B73D;
+	background-color: #ffd761;
+}
+
+#nav a:hover {
+	position: relative;
+	margin-left: -20px;
 }
