@@ -20,6 +20,13 @@ a:hover {
 	color: #0088cc;
 }
 
+img.profile {
+	float: left;
+	position: absolute;
+	margin-top: 10px;	
+	margin-left: 10px;
+}
+
 #container {
 	width: 500px;
 	height: 200px;
@@ -27,7 +34,7 @@ a:hover {
 	background: #FFFFFF;
 	margin: 200px auto;
 	padding: 10px;
-	text-align: justify;
+	z-index: 0;
 	border-top: 5px #FF3636 solid;
 	border-radius: 10px;
 }
@@ -42,9 +49,21 @@ a:hover {
 	font-size: 6em;
 }
 
+
+#description {
+	float: right;
+	width: 300px;
+	margin-top: 15px;
+}
+
+#contact {
+	font-size: 22pt;
+}
+
 #nav {
 	position: absolute;
-	left: 31%;
+	left: 30.5%;
+	top: 30%;
 	width: 50px;
 	height: 220px;
 	padding: 5px;
