@@ -34,12 +34,12 @@ a:hover {
 
 #title {
 	position: absolute;
-	top: -45px;
-	left: 150px;
+	top: -78px;
+	left: 75px;
 	font-family: 'Sanchez', serif;
 	text-transform: uppercase;
 	font-weight: bold;
-	font-size: 3.25em;
+	font-size: 6em;
 }
 
 #nav {
@@ -67,3 +67,20 @@ a:hover {
 	position: relative;
 	margin-left: -20px;
 }
+
+div.image {	
+	display: inline-block;
+	margin-right: 10px;
+}	
+
+img:hover {
+	opacity: 0.5;
+	transition: all 0.2s linear;
+}
+
+div.slider {
+	margin: 15px auto;
+	width: 475px;
+	overflow: hidden;
+}
+
