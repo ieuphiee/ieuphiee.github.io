@@ -9,7 +9,9 @@ ul {
 	list-style-type: circle;
 }
 
-blockquote {
+.quote {
+	margin: 10px;
+	padding: 2px;
 	background-color: #E9E9E9;
 	font-family: 'Inconsolata', monospace;
 	font-size: 10pt;
@@ -25,7 +27,7 @@ a:hover {
 	color: #0088cc;
 }
 
-h1{
+h1 {
 	text-align: center;
 	margin-top: 5px;
 	border-bottom: 1px solid #000000;
@@ -36,8 +38,7 @@ h1{
 }
 
 img.profile {
-	float: left;
-	position: absolute;
+	float: right;
 	margin-top: 10px;	
 	margin-left: 10px;
 }
@@ -66,8 +67,8 @@ img.profile {
 
 
 #description {
-	float: right;
-	text-align: center;
+	float: left;
+	text-align: left;
 	width: 300px;
 
 }
