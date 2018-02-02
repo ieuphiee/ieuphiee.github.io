@@ -12,32 +12,43 @@
   	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
   	<link href="https://fonts.googleapis.com/css?family=Sanchez" rel="stylesheet">
   	<link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet">
-
+	<link href="https://fonts.googleapis.com/css?family=VT323" rel="stylesheet">
   	<!-- Scripts -->
 	<script src="https://use.fontawesome.com/63fef2390e.js"></script>
 	<script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
-
-
+	<script>
+		alert("hi");
+	var	i = 0;
+	function typeWriter() {
+		if (i < txt.length) {
+			document.getElementById("#title").innerHTML += txt.charAt(i);
+    		i++;
+    		setTimeout(typeWriter, 50);
+  }
+}
+	</script>
 </head>
-<body>
+<body onload="typeWriter()">
 
-<div id="nav">
-	<a href="/index.html"><i class="fa fa-home" aria-hidden="true"></i></a>
-	<a href="/about.html"><i class="fas fa-user-circle"></i></a>
-	<a href="/work.html"><i class="far fa-file-code"></i></a>
-</div>
+
 	
 <div id="container">
 
+	<div id="nav">
+		<a href="/index.html"><i class="fas fa-user-circle"></i></a>
+		<a href="/work.html"><i class="far fa-file-code"></i></a>
+		<a href="/about.html"><i class="fas fa-share-alt"></i></a>
+	</div>
 	
   <div id="title">Jiamin Li</div>
   	<div id="contact">
-  	
-	  <i class="fab fa-linkedin-in"></i><a href="https://www.linkedin.com/in/jli79/">  LinkedIn</a><br>
-	  <i class="fa fa-file-pdf"></i><a href="Jiamin-Li-Resume.pdf">  Resume</a><br>
-	  <i class="far fa-envelope-open"></i> jli79@smith.edu<br>
+  	<h1>[Connect with me]</h1>
+	  <a href="https://www.linkedin.com/in/jli79/" alt="LinkedIn"><img src="img/linkedinsvg.svg"></a>
+	  <a href="https://github.com/ieuphiee" alt="Github"><img src="img/github.svg"></a>
+	  <a href="mailto:jli79@smith.edu" alt="Email"><img src="img/email.svg"></a>
+	 <a href="Jiamin-Li-Resume.pdf" alt="Resume"><img src="img/resume.svg"></a>
+
 	</div>
-  </div>
 	
     
 </div>

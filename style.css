@@ -3,7 +3,6 @@ body {
 	background-repeat: repeat;
 	font-family: 'Roboto', sans-serif;	
 	font-size: 12px;
-	
 }
 
 ul {
@@ -20,6 +19,16 @@ a:hover {
 	color: #0088cc;
 }
 
+h1{
+	text-align: center;
+	margin-top: 5px;
+	border-bottom: 1px solid #000000;
+	font-family: 'VT323', monospace;
+	text-transform: uppercase;
+	letter-spacing: 5px;
+	font-size: 2.5em;
+}
+
 img.profile {
 	float: left;
 	position: absolute;
@@ -32,9 +41,9 @@ img.profile {
 	height: 200px;
 	position: relative;
 	background: #FFFFFF;
-	margin: 200px auto;
+	margin: 0 auto;
+	top: 200px;
 	padding: 10px;
-	z-index: 0;
 	border-top: 5px #FF3636 solid;
 	border-radius: 10px;
 }
@@ -57,16 +66,29 @@ img.profile {
 }
 
 #contact {
-	font-size: 22pt;
+	position: absolute;
+	top: 30px;
+	left: 30px;
+}
+
+#contact img {
+	width: 100px;
+	margin: 5px;
+	display: inline-block;
+}
+
+.wrapper {
+	position: relative;
+	z-index: 10;
 }
 
 #nav {
 	position: absolute;
-	left: 30.5%;
-	top: 30%;
+	left: -50px;
 	width: 50px;
 	height: 220px;
 	padding: 5px;
+	z-index: -1;
 }
 
 #nav a {
