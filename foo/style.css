@@ -1,0 +1,225 @@
+@import url('https://fonts.googleapis.com/css?family=Glegoo|Oswald|Roboto|Roboto+Condensed');
+
+body {
+	background-color: #F7F7F7;
+	font-family: "Roboto", sans-serif;
+	font-size: 11pt;
+	color: #000000;
+	margin: 0;
+}
+
+header {
+	background-color: #F7F7F7;
+}
+
+#navbar {
+	width: 100%;
+	height: 50px;
+	margin: 0;
+	overflow: hidden;
+	background-color: #000000;
+	
+}
+
+.main-nav {
+	float: right;
+	height: 100%;
+	margin: 0 2% 0 0;
+}
+
+.main-nav > li {
+	display: inline-block;
+	background-color: #B8204E;
+	margin: -5px 0 0 0;;
+	padding: 20px;
+	transform: skewX(-20deg);
+		-ms-transform: skewX(-20deg);
+		-webkit-transform: skewX(-20deg);
+	font-size: 12pt;
+}
+
+.main-nav > li > a {
+	text-decoration: none;
+	font-family: 'Roboto Condensed', sans-serif;
+	text-transform: uppercase;
+	color: #ffffff;
+}
+
+.main-nav > li:hover {
+	background-color: #ff9900;
+	border-right: 2px solid white;
+	transition: all 0.3s ease;
+}
+
+.logo {
+	float: left;
+	margin-top: 2px;
+	margin-left: 10px;
+	padding: 5px;
+	font-family: 'Glegoo', serif;
+	text-transform: uppercase;
+	font-size: 15pt;
+	color: #ffffff;
+	font-weight: bold;
+	letter-spacing: 2px;
+}
+
+#lead-banner {
+	height: 100%;
+	width: 100%;
+	position: relative;
+}
+
+#lead-banner > img {
+	width: 75%;
+}
+
+.blurb {
+	width: 460px;
+	position: absolute;
+	bottom: 15%;
+	right: 5%;
+	padding: 10px;
+	text-align: justify;
+	color: #000000;
+}
+
+.blurb > h1 {
+	font-family: 'Oswald', sans-serif;
+	font-size: 35pt;
+	text-align: center;
+	text-transform: uppercase;
+	line-height: 10px;
+	letter-spacing: 1px;
+}
+
+
+.wrapper {
+	background-color: #ffffff;
+	max-width: 960px;
+	width: 100%;
+	margin: 0 auto;
+	border: 1px solid lightgrey;
+}
+
+.section {
+	background-color: #000000;
+	padding: 10px;
+	color: #ffffff;
+	font-family: 'Oswald', sans-serif;
+	font-size: 40px;
+	text-align: center;
+	text-transform: uppercase;
+}
+
+.row {
+	margin: 10px 0 10px 0;
+	text-align: center;
+}
+
+figure {
+	display: inline-block;
+	margin: 8px;
+}
+
+figcaption, .player {
+	font-size: 11px;
+	color: #6E6E6E;
+	text-transform: uppercase;
+}
+
+figure > img:hover {
+	opacity: 0.5;
+	cursor: pointer;
+	transition: all 0.5s ease;
+}
+
+
+#monthSelector {
+	display: inline-block;
+	width: 200px;
+	height: 50px;
+	padding: 5px;
+	font-size: 15pt;
+	font-family: 'Roboto Condensed';
+}
+
+#previous, #next {
+	border: none;
+	height: 50px;
+	padding: 5px;
+	font-size: 12pt;
+	background-color: transparent;
+}
+
+#previous:hover, #next:hover {
+	color: #ff9900;
+	transition: all 0.3s ease;
+}
+
+
+#lineChart {
+	padding: 10px 100px 20px 100px;
+	background-color: #F5F5F5;
+}
+
+#barChart {
+	padding: 10px 100px 20px 100px;
+	background-color: #F5F5F5;
+}
+
+
+.axis {
+	font-size: 12px;
+}
+
+
+.axis path,
+.axis line {
+	fill: none;
+	stroke: lightgrey;
+	shape-rendering: crispEdges;
+}
+
+.line {
+	fill: none;
+	stroke: #ff9900;
+	stroke-width: 3px;
+}
+
+.dot {
+	fill: none;
+	stroke: #ff9900;
+	stroke-width: 2px;
+}
+
+.dot:hover {
+	fill: #FE4A49;
+	transition: all 0.3s linear;
+}
+
+
+.bar:hover {
+	fill: #000000;
+	transition: all 0.4s linear;
+}
+
+.x.axis text {
+	fill: #000000;
+}
+
+.y.axis text {
+	fill: #000000;
+}
+
+.tooltip {	
+    position: absolute;			
+    text-align: center;							
+    padding: 5px;
+	background-color: #000000;
+	font-size: 11px;
+	color: #ffffff;
+	border: 1px solid #ffffff;
+    pointer-events: none;			
+}
+
