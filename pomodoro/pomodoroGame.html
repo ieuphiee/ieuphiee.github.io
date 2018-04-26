@@ -86,8 +86,8 @@
      */
     function preload ()
     {
-        this.load.image('sky', 'images/justclouds.png');
-        this.load.image('ground', 'images/grounded.png');
+        this.load.image('sky', 'images/sky.png');
+        this.load.image('ground', 'images/grounded2.png');
         this.load.image('tomato', 'images/tomato.png');
         this.load.image('tile', 'images/tilegrass.png');
 
@@ -106,13 +106,13 @@
      */
     function create ()
     {
-        //add sky
-        skyBg = this.add.tileSprite(0, 250, 1600, 1200, 'sky');
-        skyBg.setScale(1.5);
+        //add sky   
+        skyBg = this.add.tileSprite(800, 600, 1600, 1200, 'sky');
+        //skyBg.setScale(1.5);
 
         //add platforms
         platforms = this.physics.add.staticGroup();
-        platform = platforms.create(400, 568, 'ground').setScale(2).refreshBody();
+        platform = platforms.create(400, 580, 'ground').refreshBody();
         
         //add character
         player = this.physics.add.sprite(300, 450, 'character');
@@ -271,7 +271,7 @@
             //loop platform
             platforms.children.iterate(function (platform) {
                     if(platform.x == 399){
-                        platforms.create(800, 568, 'ground').setScale(2).refreshBody();
+                        platforms.create(800, 580, 'ground').refreshBody();
                     }
             })
             
