@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+ <head>
+ 	<h1></h1>
+ </head>
+ <style>
+ 	.wrapper{
+ 		text-align:center;
+ 	}
+ 	#btn{
+ 		font-family: sans-serif;
+ 	}
+ 	#count, #period{
+ 		text-align: center;
+ 		font-size: 600%;
+ 		font-family: sans-serif;
+ 	}
+</style>
+ <body>
+ 	<h1 id="count"></h1>
+ 	<h1 id ="period"></h1>
+ 	<div class="wrapper">
+ 		<button id="btn">Game</button>
+ 	</div>
+  <script>
+  	//set up button to go to game
+  	let btn = document.getElementById("btn");
+  	btn.onclick = function(){
+  		location.href = "pomodoroGame.html";
+  	};
+
+  	//time user wants to study for 
+  	let timeInMin;
+  	//get input from form of menu page
+  	let btnString = window.location.search;
+  	let time = btnString.slice(8,9);
+  	if(time == "1"){
+  		timeInMin = 60;
+  	}
+  	else if(time == "2"){
+  		timeInMin = 120;
+  	}
+  	else{
+  		timeInMin = 180;
+  	}
+
+  	//btn.disabled = true;
+
+  	//stores number of study(25min) + game(5min) rounds
+  	let rounds = timeInMin/30;
+
+  	//duration in milliseconds 
+  	let duration = (25+5)*1000*60; //25min study
+
+  	//timer audio
+  	let audio = new Audio('clock.mp3');
+  	let tenSec = new Audio('10s.mp3');
+
+
+  	//start studying
+  	startRound();
+
+  	/**
+  	 * starts a round of study + game
+  	 */
+	function startRound(){
+		countDown(duration);
+	}
+
+	/**
+	 *timer that counts down each second
+	 */
+  	function countDown(duration){
+  		let timer = setInterval(function(){
+			duration = duration - 1000;
+			let minutes = Math.floor((duration % (1000*60*60))/(1000*60));
+			let seconds = Math.floor((duration % (1000*60))/1000);
+			//game period done
+			if(minutes == 0 && seconds == 0){
+				clearInterval(timer);
+				gameDone();
+			}
+			//time above 4:59 is study time - subtract 5
+			if(minutes>4){
+				minutes = minutes-5;
+				studyPeriod();
+			}
+			//study period done
+			if(minutes == 4 && seconds == 59){
+				studyDone();
+				gamePeriod();
+			}
+			if(seconds<10){
+				seconds = "0"+seconds;
+			}
+			//10 sec countdown
+			if(minutes == 0 && seconds == 10){
+				tenSec.play();
+			}
+			
+			//print time
+			document.getElementById("count").innerHTML = minutes + " : " + seconds;			
+	  	}, 1000);	
+
+	}
+
+	/**
+	 * Switch over to studying 
+	 */
+	function gameDone(){
+		if(rounds > 0){
+			rounds -= 1;
+			//redirect user automaticall to study page
+			location.href = "timer.html";
+			startRound();
+		}
+		else{
+			alert("You're done studying!");
+		}
+	}
+
+	/**
+	 * Switch over to game 
+	 */	function studyDone(){
+		audio.play();
+	}
+
+	
+	/**
+	 * display timer page during study period
+	 */
+	function studyPeriod(){
+		//btn.disabled = true;
+		document.getElementById("period").innerHTML = "Study";
+	}
+	
+	/**
+	 * go to game during game period
+	 */
+	function gamePeriod(){
+		btn.disabled = false;  
+		document.getElementById("period").innerHTML = "Play Game";
+	}
+	
+  </script>
+ </body>
+</html>
