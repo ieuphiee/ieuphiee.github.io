@@ -26,7 +26,7 @@
   	//set up button to go to game
   	let btn = document.getElementById("btn");
   	btn.onclick = function(){
-  		location.href = "pomodoroGame.html";
+  		location.href = "pomodoroTile.html";
   	};
 
   	//time user wants to study for 
@@ -110,8 +110,6 @@
 	function gameDone(){
 		if(rounds > 0){
 			rounds -= 1;
-			//redirect user automaticall to study page
-			location.href = "timer.html";
 			startRound();
 		}
 		else{
